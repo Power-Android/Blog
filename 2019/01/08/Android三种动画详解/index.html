@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.7.0',
+    sidebar: {"position":"left","width":240,"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言自尊，自律，自强，自爱。–Power 一直以来自己对Android的动画一知半解，所以决定写这篇文章来详细系统的学习Android的三种动画，即   View Animation（视图动画） Drawable Animation（帧动画） Property Animation（属性动画）">
+<meta name="keywords" content="Android-动画（Animation）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android三种动画详解">
+<meta property="og:url" content="/2019/01/08/Android三种动画详解/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言自尊，自律，自强，自爱。–Power 一直以来自己对Android的动画一知半解，所以决定写这篇文章来详细系统的学习Android的三种动画，即   View Animation（视图动画） Drawable Animation（帧动画） Property Animation（属性动画）">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/translate_anim.gif">
+<meta property="og:image" content="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/scale_anim.gif">
+<meta property="og:image" content="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/rotate_anim.gif">
+<meta property="og:image" content="https://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/alhpa_anim.gif">
+<meta property="og:image" content="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/set_anim.gif">
+<meta property="og:image" content="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/pic/interpolator.jpg">
+<meta property="og:image" content="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/interpolator.gif">
+<meta property="og:image" content="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/drawable_anim.gif">
+<meta property="og:updated_time" content="2019-01-09T09:04:55.539Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android三种动画详解">
+<meta name="twitter:description" content="前言自尊，自律，自强，自爱。–Power 一直以来自己对Android的动画一知半解，所以决定写这篇文章来详细系统的学习Android的三种动画，即   View Animation（视图动画） Drawable Animation（帧动画） Property Animation（属性动画）">
+<meta name="twitter:image" content="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/translate_anim.gif">
+
+
+
+
+
+
+  <link rel="canonical" href="/2019/01/08/Android三种动画详解/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Android三种动画详解 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-首页">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-分类">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-归档">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-标签">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-关于">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="/2019/01/08/Android三种动画详解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android三种动画详解
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-01-08 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-08T00:00:00+08:00">2019-01-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-09 17:04:55" itemprop="dateModified" datetime="2019-01-09T17:04:55+08:00">2019-01-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>自尊，自律，自强，自爱。–Power</p>
+<p>一直以来自己对Android的动画一知半解，所以决定写这篇文章来详细系统的学习Android的三种动画，即 </p>
+<ul>
+<li>View Animation（视图动画）</li>
+<li>Drawable Animation（帧动画）</li>
+<li>Property Animation（属性动画）</li>
+</ul>
+<a id="more"></a>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><h3 id="1-View-Animation（视图动画）"><a href="#1-View-Animation（视图动画）" class="headerlink" title="1.View Animation（视图动画）"></a>1.View Animation（视图动画）</h3><p>1.1 View动画的概述及种类<br>视图动画的作用对象是View，支持四种动画效果，分别是平移动画，缩放动画，旋转动画，透明度动画。譬如，我们可以对TextView设置其文本的移动，旋转，缩放，透明。</p>
+<p>视图动画可以通过XML或通过代码动态创建，对于视图动画建议使用XML文件定义，因为它具有更高的可读性，可重用性。</p>
+<p>下面我们来分别看一下View动画的四种效果：</p>
+<ul>
+<li><p>平移动画（TranslateAnimation）<br>  <img src="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/translate_anim.gif" width="160" div="" align="center"></p>
+</li>
+<li><p>缩放动画（ScaleAnimation）<br>  <img src="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/scale_anim.gif" width="160" div="" align="center"></p>
+</li>
+<li><p>旋转动画（RotateAnimation）<br>  <img src="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/rotate_anim.gif" width="160" div="" align="center"></p>
+</li>
+<li><p>透明度动画（AlphaAnimation）<br>  <img src="https://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/alhpa_anim.gif" width="160" div="" align="center"></p>
+</li>
+</ul>
+<p>view动画的四种变换我们通过效果图已基本了解，下面我们通过表格系统的了解一下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">标签</th>
+<th style="text-align:center">子类</th>
+<th style="text-align:center">效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">平移动画</td>
+<td style="text-align:center">&lt; translate &gt;</td>
+<td style="text-align:center">TranslateAnimation</td>
+<td style="text-align:center">移动View</td>
+</tr>
+<tr>
+<td style="text-align:center">缩放动画</td>
+<td style="text-align:center">&lt; scale &gt;</td>
+<td style="text-align:center">ScaleAnimation</td>
+<td style="text-align:center">方法或缩小View</td>
+</tr>
+<tr>
+<td style="text-align:center">旋转动画</td>
+<td style="text-align:center">&lt; rotate &gt;</td>
+<td style="text-align:center">RotateAnimation</td>
+<td style="text-align:center">旋转view</td>
+</tr>
+<tr>
+<td style="text-align:center">透明度动画</td>
+<td style="text-align:center">&lt; alpha &gt;</td>
+<td style="text-align:center">AlphaAnimation</td>
+<td style="text-align:center">改变View的透明度</td>
+</tr>
+</tbody>
+</table>
+<p>要使用View动画，首先要创建XML文件，我们需要在res下新建anim文件夹，接着在anim下创建animation resource file的xml文件，我们举例为view_anim.xml</p>
+<p>我们通过xml文件来了解它们各自的语法：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">set</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--平移动画标签--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">translate</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:fromXDelta</span>=<span class="string">"0%p"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:toXDelta</span>=<span class="string">"20%p"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:fromYDelta</span>=<span class="string">"0%p"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:toYDelta</span>=<span class="string">"20%p"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:duration</span>=<span class="string">"4000"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--缩放动画标签--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scale</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:fromXScale</span>=<span class="string">"1.0"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:toXScale</span>=<span class="string">"0.2"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:fromYScale</span>=<span class="string">"1.0"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:toYScale</span>=<span class="string">"0.2"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:pivotX</span>=<span class="string">"50%"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:pivotY</span>=<span class="string">"50%"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:duration</span>=<span class="string">"4000"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--旋转动画标签--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">rotate</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:fromDegrees</span>=<span class="string">"0"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:toDegrees</span>=<span class="string">"360"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:pivotX</span>=<span class="string">"50%"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:pivotY</span>=<span class="string">"50%"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:duration</span>=<span class="string">"4000"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--透明度动画标签--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">alpha</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:fromAlpha</span>=<span class="string">"1.0"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:toAlpha</span>=<span class="string">"0.2"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:duration</span>=<span class="string">"4000"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>从上面的代码我们知道，View动画既可以是单个动画，也可以有一系列动画组成。<br>这是因为View动画的四种种类分别对应着Animation的四个子类（TranslateAnimation，ScaleAnimation，RotateAnimation，AlphaAnimation），除了以上四个子类它还有一个AnimationSet类，对应xml标签为<code>&lt;set&gt;</code>，它是一个容器，可以包含若干个动画，并且内部也可以继续嵌套<code>&lt;set&gt;</code>集合的。<br>我们在activity对TextView设置动画：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> power</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2018-08-08 20:28:58</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: MainActivity</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> TextView textView;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        textView = findViewById(R.id.textview);</span><br><span class="line">        textView.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">                Animation animation = AnimationUtils.loadAnimation(MainActivity.<span class="keyword">this</span>,R.anim.viewanimation);</span><br><span class="line">                textView.startAnimation(animation);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们来看下动画集合的运行效果：<br><img src="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/set_anim.gif" width="160" div="" align="center"></p>
+<p>1.2 View动画的属性详解</p>
+<ul>
+<li>Animation属性详解：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">xml属性</th>
+<th style="text-align:center">java方法</th>
+<th style="text-align:center">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">android:duration</td>
+<td style="text-align:center">setDuration(long)</td>
+<td style="text-align:center">动画持续时间，毫秒为单位</td>
+</tr>
+<tr>
+<td style="text-align:center">android:ShareInterpolator</td>
+<td style="text-align:center">setInterpolator(Interpolator)</td>
+<td style="text-align:center">设定插值器（指定的动画效果，譬如回弹等）</td>
+</tr>
+<tr>
+<td style="text-align:center">android:fillAfter</td>
+<td style="text-align:center">setFillAfter(boolean)</td>
+<td style="text-align:center">控件动画结束时是否保持动画最后的状态</td>
+</tr>
+<tr>
+<td style="text-align:center">android:fillBefore</td>
+<td style="text-align:center">setFillBefore(boolean)</td>
+<td style="text-align:center">控件动画结束时是否还原到开始动画前的状态</td>
+</tr>
+<tr>
+<td style="text-align:center">android:repeatMode</td>
+<td style="text-align:center">setRepeatMode(int)</td>
+<td style="text-align:center">重复类型有两个值，reverse表示倒序回放，restart表示从头播放</td>
+</tr>
+<tr>
+<td style="text-align:center">android:startOffset</td>
+<td style="text-align:center">setStartOffset(long)<span class="Apple-tab-span" style="white-space:pre"></span></td>
+<td style="text-align:center">调用start函数之后等待开始运行的时间，单位为毫秒</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>TranslateAnimation属性详解：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">xml属性</th>
+<th style="text-align:center">java方法</th>
+<th style="text-align:center">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">android:fromXDelta</td>
+<td style="text-align:center">TranslateAnimation(float fromXDelta, …)</td>
+<td style="text-align:center">起始点X轴坐标，数值，百分比，百分比p，<em>注①</em></td>
+</tr>
+<tr>
+<td style="text-align:center">android:fromYDelta</td>
+<td style="text-align:center">TranslateAnimation(…, float fromYDelta, …)</td>
+<td style="text-align:center">起始点Y轴从标，同上规律</td>
+</tr>
+<tr>
+<td style="text-align:center">android:toXDelta</td>
+<td style="text-align:center">TranslateAnimation(…, float toXDelta, …)</td>
+<td style="text-align:center">结束点X轴坐标，同上规律</td>
+</tr>
+<tr>
+<td style="text-align:center">android:toYDelta</td>
+<td style="text-align:center">TranslateAnimation(…, float toYDelta)</td>
+<td style="text-align:center">结束点Y轴坐标，同上规律</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注①：</strong> 数值、百分数、百分数p，譬如50表示以当前View左上角坐标加50px为初始点、50%表示以当前View的左上角加上当前View宽高的50%做为初始点、50%p表示以当前View的左上角加上父控件宽高的50%做为初始点</p>
+</blockquote>
+<ul>
+<li>ScaleAnimation属性详解：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">xml属性</th>
+<th style="text-align:center">java方法</th>
+<th style="text-align:center">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">android:fromXScale</td>
+<td style="text-align:center">ScaleAnimation(float fromX, …)</td>
+<td style="text-align:center">初始X轴缩放比例，1.0表示无变化</td>
+</tr>
+<tr>
+<td style="text-align:center">android:toXScale</td>
+<td style="text-align:center">ScaleAnimation(…, float toX, …)</td>
+<td style="text-align:center">结束X轴缩放比例</td>
+</tr>
+<tr>
+<td style="text-align:center">android:fromYScale</td>
+<td style="text-align:center">ScaleAnimation(…, float fromY, …)</td>
+<td style="text-align:center">初始Y轴缩放比例</td>
+</tr>
+<tr>
+<td style="text-align:center">android:toYScale</td>
+<td style="text-align:center">ScaleAnimation(…, float toY, …)</td>
+<td style="text-align:center">结束Y轴缩放比例</td>
+</tr>
+<tr>
+<td style="text-align:center">android:pivotX</td>
+<td style="text-align:center">ScaleAnimation(…, float pivotX, …)</td>
+<td style="text-align:center">缩放起点X轴坐标，数值，百分比，百分比p，<em>注①</em></td>
+</tr>
+<tr>
+<td style="text-align:center">android:pivotY</td>
+<td style="text-align:center">ScaleAnimation(…, float pivotY)</td>
+<td style="text-align:center">缩放起点Y轴坐标，同上规律</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>RotateAnimation属性详解：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">xml属性</th>
+<th style="text-align:center">Java方法</th>
+<th style="text-align:center">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">android:fromDegrees</td>
+<td style="text-align:center">RotateAnimation(float fromDegrees, …)</td>
+<td style="text-align:center">旋转开始角度，正代表顺时针度数，负代表逆时针度数</td>
+</tr>
+<tr>
+<td style="text-align:center">android:toDegrees</td>
+<td style="text-align:center">RotateAnimation(…, float toDegrees, …)</td>
+<td style="text-align:center">旋转结束角度，正代表顺时针度数，负代表逆时针度数</td>
+</tr>
+<tr>
+<td style="text-align:center">android:pivotX</td>
+<td style="text-align:center">RotateAnimation(…, float pivotX, …)</td>
+<td style="text-align:center">缩放起点X坐标，数值，百分比，百分比p，<strong>注①</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">android:pivotY</td>
+<td style="text-align:center">RotateAnimation(…, float pivotY)</td>
+<td style="text-align:center">缩放起点Y坐标，同上规律</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>AlphaAnimation属性详解：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">xml属性</th>
+<th style="text-align:center">java方法</th>
+<th style="text-align:center">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">android:fromAlpha</td>
+<td style="text-align:center">AlphaAnimation(float fromAlpha, …)</td>
+<td style="text-align:center">动画开始的透明度（0.0到1.0，0.0是全透明，1.0是不透明）</td>
+</tr>
+<tr>
+<td style="text-align:center">android:toAlpha</td>
+<td style="text-align:center">AlphaAnimation(…, float toAlpha)</td>
+<td style="text-align:center">动画结束的透明度，同上</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>AnimationSet属性详解：<br>  AnimationSet继承自Animation，是上面四种的组合容器管理类，没有自己特有的属性，他的属性继承自Animation，所以特别注意，<strong><em>当我们对set标签使用Animation的属性时会对该标签下的所有子控件都产生影响。</em></strong>譬如我们在set标签下加入duration=“1000”，子控件的duration属性会失效。</li>
+</ul>
+<p>1.3 View动画的使用方法及注意事项</p>
+<ul>
+<li>上述的使用方法已经非常详细了，也并没有什么难以理解的地方，我们只需要创建相应的xml文件，然后在activity里startAnimation就可以完成动画了。当然了，Animation类和View操作Animation还有一些如下的实用方法：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Animation类的方法</th>
+<th style="text-align:center">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">reset()</td>
+<td style="text-align:center">重置Animation的初始化</td>
+</tr>
+<tr>
+<td style="text-align:center">cancel()</td>
+<td style="text-align:center">取消Animation动画</td>
+</tr>
+<tr>
+<td style="text-align:center">start()</td>
+<td style="text-align:center">开始Animation动画</td>
+</tr>
+<tr>
+<td style="text-align:center">setAnimationListener()</td>
+<td style="text-align:center">给当前Animation设置动画监听</td>
+</tr>
+<tr>
+<td style="text-align:center">hasStarted()</td>
+<td style="text-align:center">判断当前Animation是否开始</td>
+</tr>
+<tr>
+<td style="text-align:center">hasEnded()</td>
+<td style="text-align:center">判断当前Animation是否结束</td>
+</tr>
+<tr>
+<td style="text-align:center">—————————-</td>
+<td style="text-align:center">—————————-</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>View类对Animation的操作方法</strong></td>
+<td style="text-align:center"><strong>解释</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">startAnimation(Animation animation)<span class="Apple-tab-span" style="white-space:pre"></span></td>
+<td style="text-align:center">对当前View开始设置的Animation动画</td>
+</tr>
+<tr>
+<td style="text-align:center">clearAnimation()</td>
+<td style="text-align:center">取消当View在执行的Animation动画</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>注意事项<ul>
+<li><strong><em>特别特别注意：补间动画执行之后并未改变View的真实布局属性值。切记这一点，譬如我们在Activity中有一个 Button在屏幕上方，我们设置了平移动画移动到屏幕下方然后保持动画最后执行状态呆在屏幕下方，这时如果点击屏幕下方动画执行之后的Button是没 有任何反应的，而点击原来屏幕上方没有Button的地方却响应的是点击Button的事件。</em></strong></li>
+<li><strong><em>在进行动画的时候，尽量使用dp，因为px会导致适配问题。</em></strong></li>
+</ul>
+</li>
+</ul>
+<p>1.4 View动画Interpolator插值器详解</p>
+<ul>
+<li>插值器简介<br>  首先，我们先看一下源码的解释：<br>  <img src="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/pic/interpolator.jpg" alt="interpolato"><br>注释说明：插值器定义了动画的变化，使一些基础的动画如（平移，缩放，旋转，透明）可以被加速，减速，重复等<br>通过上图可以看见其实系统提供给我们的各类型插值器都是实现了Interpolator接口，具体如下：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">java类</th>
+<th style="text-align:center">xml</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">AccelerateDecelerateInterpolator</td>
+<td style="text-align:center">@android:anim/accelerate_decelerate_interpolator</td>
+<td style="text-align:center">动画始末速率较慢，中间加速</td>
+</tr>
+<tr>
+<td style="text-align:center">AccelerateInterpolator</td>
+<td style="text-align:center">@android:anim/accelerate_interpolator</td>
+<td style="text-align:center">动画开始速率较慢，之后慢慢加速</td>
+</tr>
+<tr>
+<td style="text-align:center">AnticipateInterpolator</td>
+<td style="text-align:center">@android:anim/anticipate_interpolator</td>
+<td style="text-align:center">开始的时候从后向前甩</td>
+</tr>
+<tr>
+<td style="text-align:center">AnticipateOvershootInterpolator</td>
+<td style="text-align:center">@android:anim/anticipate_overshoot_interpolator</td>
+<td style="text-align:center">类似上面AnticipateInterpolator</td>
+</tr>
+<tr>
+<td style="text-align:center">BounceInterpolator</td>
+<td style="text-align:center">@android:anim/bounce_interpolator</td>
+<td style="text-align:center">动画结束时弹起</td>
+</tr>
+<tr>
+<td style="text-align:center">CycleInterpolator</td>
+<td style="text-align:center">@android:anim/cycle_interpolator</td>
+<td style="text-align:center">循环播放速率改变为正弦曲线</td>
+</tr>
+<tr>
+<td style="text-align:center">DecelerateInterpolator</td>
+<td style="text-align:center">@android:anim/decelerate_interpolator</td>
+<td style="text-align:center">动画开始快然后慢</td>
+</tr>
+<tr>
+<td style="text-align:center">LinearInterpolator</td>
+<td style="text-align:center">@android:anim/linear_interpolator</td>
+<td style="text-align:center">动画匀速改变</td>
+</tr>
+<tr>
+<td style="text-align:center">OvershootInterpolator</td>
+<td style="text-align:center">@android:anim/overshoot_interpolator</td>
+<td style="text-align:center">向前弹出一定值之后回到原来位置</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>插值器的使用<br>  插值器的使用比较简答，如下：</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line">&lt;!--运动结束时弹起--&gt;</span><br><span class="line">android:interpolator="@android:anim/bounce_interpolator"&gt;</span><br><span class="line"><span class="comment">&lt;!--平移动画标签--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">translate</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fromXDelta</span>=<span class="string">"0%p"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:toXDelta</span>=<span class="string">"20%p"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fromYDelta</span>=<span class="string">"0%p"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:toYDelta</span>=<span class="string">"20%p"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:duration</span>=<span class="string">"4000"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--缩放动画标签--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>  我们看一下设置插值器后的效果：<br>  <img src="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/interpolator.gif" width="160" div="" align="center"></p>
+</li>
+<li><p>插值器的自定义<br>  当系统提供给我们的插值器不能满足开发需求时，就需要我们自定义，而插值器的自定义有两种方式，一种xml实现，一种java实现。</p>
+<ul>
+<li><p>xml实现方式<br>在anim文件下创建xml文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">accelerateInterpolator</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:factor</span>=<span class="string">"0.8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">accelerateInterpolator</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过代码我们发现，这种方式只能修改现有插值器的一些属性，但有些插值器不具备修改属性，那么我们就通过java代码实现进一步需求</p>
+</li>
+<li><p>java代码实现方式<br>通过上面的学习我们知道，所有的插值器都是继承自Interpolator接口，它则继承TimeInterpolator接口，而这个接口定义了float getInterpolation(float input);方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccelerateDecelerateInterpolator</span> <span class="keyword">extends</span> <span class="title">BaseInterpolator</span></span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">NativeInterpolatorFactory</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getInterpolation</span><span class="params">(<span class="keyword">float</span> input)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">float</span>)(Math.cos((input + <span class="number">1</span>) * Math.PI) / <span class="number">2.0f</span>) + <span class="number">0.5f</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TimeInterpolator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Maps a value representing the elapsed fraction of an animation to a value that represents</span></span><br><span class="line"><span class="comment"> * the interpolated fraction. This interpolated value is then multiplied by the change in</span></span><br><span class="line"><span class="comment"> * value of an animation to derive the animated value at the current elapsed animation time.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> input A value between 0 and 1.0 indicating our current point</span></span><br><span class="line"><span class="comment"> *        in the animation where 0 represents the start and 1.0 represents</span></span><br><span class="line"><span class="comment"> *        the end</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> The interpolation value. This value can be more than 1.0 for</span></span><br><span class="line"><span class="comment"> *         interpolators which overshoot their targets, or less than 0 for</span></span><br><span class="line"><span class="comment"> *         interpolators that undershoot their targets.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">getInterpolation</span><span class="params">(<span class="keyword">float</span> input)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>我们需要继承Interpolator接口并实现getInterpolation();，在方法里处理业务逻辑即可。</p>
+<h3 id="2-Drawable-Animation（帧动画）"><a href="#2-Drawable-Animation（帧动画）" class="headerlink" title="2.Drawable Animation（帧动画）"></a>2.Drawable Animation（帧动画）</h3><p>2.1帧动画概述<br>帧动画是顺序播放一组预先定义好的图片，不同于View动画，系统提供了另外一个类AnimationDrawable来使用帧动画。</p>
+<p>2.2帧动画的使用<br>首先我们找一组帧动画的图片放入drawable-xhdpi文件夹下，其次在drawable文件夹下创建xml文件，如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">animation-list</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:oneshot</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/refresh1"</span> <span class="attr">android:duration</span>=<span class="string">"180"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/refresh2"</span> <span class="attr">android:duration</span>=<span class="string">"180"</span>/&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/refresh25"</span> <span class="attr">android:duration</span>=<span class="string">"180"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">animation-list</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">view = findViewById(R.id.view);</span><br><span class="line">        view.setBackgroundResource(R.drawable.drawable_anim);</span><br><span class="line">        view.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">                AnimationDrawable animationDrawable = (AnimationDrawable) view.getBackground();</span><br><span class="line">                animationDrawable.start();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<p>通过上述代码，帧动画已经完成了，我们来看下效果图：<br><img src="http://power-blog-resources.oss-cn-beijing.aliyuncs.com/gif/drawable_anim.gif" width="160" div="" align="center"></p>
+<p><code>&lt;animation-list&gt;</code> 必须是根节点，包含一个或者多个<code>&lt;item&gt;</code>元素，属性有：<br><code>android:oneshot true</code>代表只执行一次，false循环执行。<br><code>&lt;item&gt;</code> 类似一帧的动画资源。</p>
+<p><code>&lt;item&gt;</code> animation-list的子项，包含属性如下：<br><code>android:drawable</code> 一个frame的Drawable资源。<br><code>android:duration</code> 一个frame显示多长时间。</p>
+<p><strong><em>帧动画很简单，但容易引起OOM，我在这里也就不多赘述。</em></strong></p>
+<h3 id="3-Property-Animation（属性动画）"><a href="#3-Property-Animation（属性动画）" class="headerlink" title="3.Property Animation（属性动画）"></a>3.Property Animation（属性动画）</h3><p>3.1 未完待续…</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android-动画（Animation）/" rel="tag"># Android-动画（Animation）</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/10/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Power-Android" title="GitHub &rarr; https://github.com/Power-Android" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.jianshu.com/u/c38bb8315892" title="简书 &rarr; https://www.jianshu.com/u/c38bb8315892" rel="noopener" target="_blank"><i class="fa fa-fw fa-chrome"></i>简书</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://juejin.im/user/5c347f74518825254b5a1c20" title="掘金 &rarr; https://juejin.im/user/5c347f74518825254b5a1c20" rel="noopener" target="_blank"><i class="fa fa-fw fa-chrome"></i>掘金</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/Power_Qyh" title="CSDN &rarr; https://blog.csdn.net/Power_Qyh" rel="noopener" target="_blank"><i class="fa fa-fw fa-chrome"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/power-90-12/activities" title="知乎 &rarr; https://www.zhihu.com/people/power-90-12/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-chrome"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/6166245127/profile?rightmod=1&wvr=6&mod=personinfo" title="微博 &rarr; https://weibo.com/6166245127/profile?rightmod=1&wvr=6&mod=personinfo" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-View-Animation（视图动画）"><span class="nav-number">3.</span> <span class="nav-text">1.View Animation（视图动画）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Drawable-Animation（帧动画）"><span class="nav-number">4.</span> <span class="nav-text">2.Drawable Animation（帧动画）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Property-Animation（属性动画）"><span class="nav-number">5.</span> <span class="nav-text">3.Property Animation（属性动画）</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
