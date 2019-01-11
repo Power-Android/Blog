@@ -2122,7 +2122,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #acf2ff;
+  background: #ffda1a;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2925,4 +2925,5 @@ body {
 .main-inner {
   background: #fff;
   opacity: 0.85;
+  min-height: 500px;
 }
