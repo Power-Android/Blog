@@ -110,7 +110,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://power-blog-resources.oss-cn-beijing.aliyuncs.com/pic/viewmodel%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
 <meta property="og:image" content="https://power-blog-resources.oss-cn-beijing.aliyuncs.com/pic/viewmodel%E7%B1%BB%E5%9B%BE.png">
-<meta property="og:updated_time" content="2019-10-24T08:10:39.892Z">
+<meta property="og:updated_time" content="2019-10-25T08:59:30.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android架构组件（三）：Viewmodel">
 <meta name="twitter:description" content="前言上篇我们分析了Livedata的使用及原理，相信我们已经学会了使用Livedata来存储数据，并在观察者组件中实现回调方法，来动态更新UI数据。这里奉上（双膝已经跪烂了…）上两篇的地址：Android架构组件（一）：LifecycleAndroid架构组件（二）：LiveData方便大家进行查阅和回顾。 那么，接下来我们要学习我们的第三个架构组件——Viewmodel，我们从字面上理解，它肯定">
@@ -281,7 +281,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">6</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">7</span></a>
 
   </li>
         
@@ -570,7 +570,7 @@
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>Viewmodel</strong>的职责是为UI组件管理数据。规范化viewmodel的使用方式，不要在viewmodel层中持有UI层的引用，避免因viewmodel超长的生命周期，导致内存泄漏。实现UI组件和数据间的管理和解耦，才是这个框架带给我们的理解。<br>通过我们对源码的分析，它的功能并不复杂，但设计的十分巧妙，背后掺杂的思想和理念才是值得去反复揣度的。它可以更好的实现把业务代码下沉到viewmodel中实现，既保证了UI组件中代码的清爽，又可以实现对数据的管理。</p>
 <p><strong>Viewmodel</strong>可以用于activity中不同fragment之间的通信，也可以用作Fragment之间一种解耦方式。</p>
 <p>接下来我们会讲到Android架构的另一个组件<strong>Room</strong>，来看下这个数据库能带给我们哪些惊艳？<br>当学习完所有的组件后，我们就开始尝试着去搭一款适合自己的MVVM框架，用于加深我们对Android架构组件的学习，从而做到学以致用。</p>
-<h4 id="Android架构组件系列文章"><a href="#Android架构组件系列文章" class="headerlink" title="Android架构组件系列文章"></a>Android架构组件系列文章</h4><p><a href="https://powerofandroid.com/" target="_blank" rel="noopener">我的博客（Power）</a><br><a href="https://www.jianshu.com/p/6a6086ee1c07" target="_blank" rel="noopener">Android架构组件（一）：Lifecycle</a><br><a href="https://www.jianshu.com/p/c13e240c9989" target="_blank" rel="noopener">Android架构组件（二）：LiveData</a><br><a href="https://www.jianshu.com/p/be3f7b4b9974" target="_blank" rel="noopener">Android架构组件（三）：Viewmodel</a></p>
+<h4 id="Android架构组件系列文章"><a href="#Android架构组件系列文章" class="headerlink" title="Android架构组件系列文章"></a>Android架构组件系列文章</h4><p><a href="https://powerofandroid.com/" target="_blank" rel="noopener">我的博客（Power）</a><br><a href="https://www.jianshu.com/p/6a6086ee1c07" target="_blank" rel="noopener">Android架构组件（一）：Lifecycle</a><br><a href="https://www.jianshu.com/p/c13e240c9989" target="_blank" rel="noopener">Android架构组件（二）：LiveData</a><br><a href="https://www.jianshu.com/p/be3f7b4b9974" target="_blank" rel="noopener">Android架构组件（三）：Viewmodel</a><br><a href="https://www.jianshu.com/p/cf05150335df" target="_blank" rel="noopener">Android架构组件（四）：Room</a></p>
 <p><strong>感谢您的阅读和支持！</strong></p>
 
       
@@ -685,6 +685,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/10/25/Android架构组件（四）：Room/" rel="prev" title="Android架构组件（四）：Room">
+                Android架构组件（四）：Room <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -761,7 +765,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -980,7 +984,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">47k</span>
+    <span title="站点总字数">59k</span>
   
 
   

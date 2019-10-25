@@ -274,7 +274,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">6</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">7</span></a>
 
   </li>
         
@@ -367,6 +367,219 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="/powerofandroid.com/2019/10/25/Android架构组件（四）：Room/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Power">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Power">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/25/Android架构组件（四）：Room/" class="post-title-link" itemprop="url">Android架构组件（四）：Room</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-25 00:00:00" itemprop="dateCreated datePublished" datetime="2019-10-25T00:00:00+08:00">2019-10-25</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/25/Android架构组件（四）：Room/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/10/25/Android架构组件（四）：Room/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/2019/10/25/Android架构组件（四）：Room/" class="leancloud_visitors" data-flag-title="Android架构组件（四）：Room">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">12k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>上篇我们分析了对于Android架构体系最终要的Viewmodel组件，它可以实现数据和view之间的管理，并且能提供组件间的通讯（注意fragment获取viewmodel时传入的对象要一致）。<br>那么，接下来我们就学习一下和Livedata完美兼容的数据库——<strong>Room</strong></p>
+<p><strong>Room</strong>是Google推出的Android架构组件库中的<strong>数据持久化组件库</strong>, 也可以说是在SQLite上实现的一套ORM解决方案。<br><strong>Room</strong>数据存储库<strong>支持返回Livedata对象</strong>的可观察查询，当数据库更新时，Room 会生成更新 LiveData 对象所需的所有代码。在需要时，生成的代码会在后台线程上异步运行查询。此模式有助于使界面中显示的数据与存储在数据库中的数据保持同步。</p>
+<h4 id="Room是什么？"><a href="#Room是什么？" class="headerlink" title="Room是什么？"></a>Room是什么？</h4><p>Room主要包含四个步骤：</p>
+<ul>
+<li><p><strong>Entity</strong>：表示持有数据库行的类（即数据表结构）。对于每个实体，将会创建一个数据库表来持有他们。你必须通过Database类的entities数组来引用实体类。实体类的中的每个字段除了添加有 <strong>@Ignore注解</strong>外的，都会存放到数据库中。</p>
+</li>
+<li><p><strong>Dao</strong>：表示作为数据访问对象（DAO）的类或接口。DAO是Room的主要组件，负责定义访问数据库的方法。由 <strong>@Database注解</strong>标注的类必须包含一个无参数且返回使用 <strong>@Dao注解</strong>的类的抽象方法。当在编译生成代码时，Room创建该类的实现。</p>
+</li>
+<li><p><strong>Database</strong> ：用来创建一个数据库持有者。注解定义一系列实体，类的内容定义一系列DAO。它也是底层连接的主入口点。</p>
+</li>
+<li><p><strong>Room</strong> ：数据库的创建者 &amp; 负责数据库版本更新的具体实现者</p>
+</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/10/25/Android架构组件（四）：Room/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -697,7 +910,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.8k</span>
+                <span title="本文字数">6.9k</span>
               
 
               
@@ -900,7 +1113,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">8k</span>
+                <span title="本文字数">8.1k</span>
               
 
               
@@ -1642,7 +1855,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1844,7 +2057,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">47k</span>
+    <span title="站点总字数">59k</span>
   
 
   
